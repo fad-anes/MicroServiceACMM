@@ -1,0 +1,18 @@
+index:
+   path: /
+   controller: App\Controller\AvisControlleurController::index
+deleteAvis:
+   path: /avis/delete/{id}
+   controller: App\Controller\AvisControlleurController::deleteAvis
+updateAvis:
+   path: /avis/update/{id}
+   controller: App\Controller\AvisControlleurController::updateAvis
+createAvis:
+   path: /avis/create
+   controller: App\Controller\AvisControlleurController::createAvis
+getAvisById:
+   path: /avis/one/{id}
+   controller: App\Controller\AvisControlleurController::getAvisById
+getAvis:
+   path: /avis/all
+   controller: App\Controller\AvisControlleurController::getAvis
