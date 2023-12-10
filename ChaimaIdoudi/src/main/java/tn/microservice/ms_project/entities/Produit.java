@@ -15,7 +15,7 @@ public class Produit {
 
     private String description;
 
-    private long quantité;
+    private long quantite;
 
     private float prix;
 
@@ -56,12 +56,12 @@ public class Produit {
         this.description = description;
     }
 
-    public long getQuantité() {
-        return quantité;
+    public long getQuantite() {
+        return quantite;
     }
 
-    public void setQuantité(long quantité) {
-        this.quantité = quantité;
+    public void setQuantité(long quantite) {
+        this.quantite = quantite;
     }
 
     public float getPrix() {
