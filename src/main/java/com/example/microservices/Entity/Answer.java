@@ -1,5 +1,4 @@
 package com.example.microservices.Entity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Table(name="Answer")
-public class Answer {
+public class Answer implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idAnswer")

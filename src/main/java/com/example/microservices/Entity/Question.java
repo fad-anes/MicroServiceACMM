@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Setter
 @Getter
-@Table(name="Question")
-public class Question {
+@Table( name = "Question")
+public class Question implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name="idQuestion")
     private Long idQuestion;
     private LocalDateTime timestamp;
     @Column(columnDefinition = "TEXT")
