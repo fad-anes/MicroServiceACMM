@@ -1,25 +1,28 @@
 package com.example.microservices.Controlleur;
 
-import org.springframework.web.bind.annotation.RestController;
 import com.example.microservices.Entity.Question;
 import com.example.microservices.Service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
- import java.util.List;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/questions")
+@RequestMapping("/questions")
 public class QuestionControlleur {
 
-    @Autowired
-    private IQuestionService questionService;
+    private final IQuestionService questionService;
 
-    @GetMapping
-    public ResponseEntity<List<Question>> getAllQuestions() {
-        List<Question> questions = questionService.retrieveAllQuestions();
-        return new ResponseEntity<>(questions, HttpStatus.OK);
+    @Autowired
+    public QuestionControlleur(IQuestionService questionService) {
+        this.questionService = questionService;
+    }
+
+    @GetMapping("/allQuestions")
+    public List<Question> retrieveAllQuestions() {
+        return questionService.retrieveAllQuestions();
     }
 
     @GetMapping("/{id}")
@@ -32,21 +35,18 @@ public class QuestionControlleur {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Question> addQuestion(@RequestBody Question question) {
-        Question addedQuestion = questionService.addQuestion(question);
-        return new ResponseEntity<>(addedQuestion, HttpStatus.CREATED);
+    @PostMapping("/addQuestion")
+    public Question addQuestion(@RequestBody Question q) {
+        return questionService.addQuestion(q);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
-        Question updatedQuestion = questionService.updateQuestion(question);
-        return new ResponseEntity<>(updatedQuestion, HttpStatus.OK);
+    @PutMapping("/updateQuestion")
+    public Question updateQuestion(@RequestBody Question q) {
+        return questionService.updateQuestion(q);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removeQuestion(@PathVariable Long id) {
+    @DeleteMapping("/removeQuestion/{id}")
+    public void removeQuestion(@PathVariable("id") Long id) {
         questionService.removeQuestion(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

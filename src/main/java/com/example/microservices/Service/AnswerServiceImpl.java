@@ -1,8 +1,8 @@
 package com.example.microservices.Service;
 
 import com.example.microservices.Entity.Answer;
-import com.example.microservices.Entity.Question;
 import com.example.microservices.Repository.AnswerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -11,24 +11,42 @@ import java.util.Optional;
 
 @Service
 public class AnswerServiceImpl implements IAnswerService {
-    AnswerRepository answerrepo;
+
+    private final AnswerRepository answerRepo;
+
+    @Autowired
+    public AnswerServiceImpl(AnswerRepository answerRepo) {
+        this.answerRepo = answerRepo;
+    }
+
     @Override
-    public List<Answer> retrieveAllAnswers(){return answerrepo.findAll();};
+    public List<Answer> retrieveAllAnswers() {
+        return answerRepo.findAll();
+    }
+
     @Override
     public Answer addAnswer(Answer a) {
-        return answerrepo.save(a);
+        return answerRepo.save(a);
     }
+
     @Override
-    public Answer updateAnswer(Answer a){return answerrepo.save(a);};
+    public Answer updateAnswer(Answer a) {
+        return answerRepo.save(a);
+    }
+
     @Override
     public Answer retrieveAnswer(Long idAnswer) {
-        Optional<Answer> optionalAnswer = answerrepo.findById(idAnswer);
+        Optional<Answer> optionalAnswer = answerRepo.findById(idAnswer);
         return optionalAnswer.orElse(null);
     }
+
     @Override
-    public void removeAnswer(Long idAnswer){answerrepo.deleteById(idAnswer);};
+    public void removeAnswer(Long idAnswer) {
+        answerRepo.deleteById(idAnswer);
+    }
+
     @Override
     public List<Answer> findAnswersByTimestampRange(Date timestampStart, Date timestampEnd) {
-        return answerrepo.findByTimestampBetween(timestampStart, timestampEnd);
+        return answerRepo.findByTimestampBetween(timestampStart, timestampEnd);
     }
 }

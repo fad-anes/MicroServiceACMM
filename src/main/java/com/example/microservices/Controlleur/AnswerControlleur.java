@@ -11,16 +11,19 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/answers")
+@RequestMapping("/answers")
 public class AnswerControlleur {
 
-    @Autowired
-    private IAnswerService answerService;
+    private final IAnswerService answerService;
 
-    @GetMapping
-    public ResponseEntity<List<Answer>> getAllAnswers() {
-        List<Answer> answers = answerService.retrieveAllAnswers();
-        return new ResponseEntity<>(answers, HttpStatus.OK);
+    @Autowired
+    public AnswerControlleur(IAnswerService answerService) {
+        this.answerService = answerService;
+    }
+
+    @GetMapping("/allAnswers")
+    public List<Answer> retrieveAllAnswers() {
+        return answerService.retrieveAllAnswers();
     }
 
     @GetMapping("/{id}")
@@ -33,29 +36,31 @@ public class AnswerControlleur {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Answer> addAnswer(@RequestBody Answer answer) {
-        Answer addedAnswer = answerService.addAnswer(answer);
-        return new ResponseEntity<>(addedAnswer, HttpStatus.CREATED);
+    @PostMapping("/addAnswer")
+    public Answer addAnswer(@RequestBody Answer a) {
+        return answerService.addAnswer(a);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Answer> updateAnswer(@PathVariable Long id, @RequestBody Answer answer) {
-        Answer updatedAnswer = answerService.updateAnswer(answer);
-        return new ResponseEntity<>(updatedAnswer, HttpStatus.OK);
+    @PutMapping("/updateAnswer")
+    public Answer updateAnswer(@RequestBody Answer a) {
+        return answerService.updateAnswer(a);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removeAnswer(@PathVariable Long id) {
+    @DeleteMapping("/removeAnswer/{id}")
+    public void removeAnswer(@PathVariable("id") Long id) {
         answerService.removeAnswer(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/byTimestampRange")
     public ResponseEntity<List<Answer>> getAnswersByTimestampRange(
             @RequestParam("timestampStart") Date timestampStart,
             @RequestParam("timestampEnd") Date timestampEnd) {
-        List<Answer> answers = answerService.findAnswersByTimestampRange(timestampStart, timestampEnd);
-        return new ResponseEntity<>(answers, HttpStatus.OK);
+        try {
+            List<Answer> answers = answerService.findAnswersByTimestampRange(timestampStart, timestampEnd);
+            return new ResponseEntity<>(answers, HttpStatus.OK);
+        } catch (Exception e) {
+            // Handle exception, e.g., log it and return a meaningful response
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
