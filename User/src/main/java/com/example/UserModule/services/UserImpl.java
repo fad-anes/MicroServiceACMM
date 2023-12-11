@@ -1,6 +1,7 @@
 package com.example.UserModule.services;
 
 import com.example.UserModule.entities.User;
+import com.example.UserModule.entities.Role;
 import com.example.UserModule.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ public class UserImpl {
     private UserRepository userRepository;
 
     public User createUser(User user) {
+        user.setRole(Role.valueOf("CLIENT"));
         return userRepository.save(user);
     }
-
+    public Optional<User> login(String email,String password) {
+        return userRepository.findByEmailAndPassword(email,password);
+    }
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }

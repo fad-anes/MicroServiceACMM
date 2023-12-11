@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,21 +24,39 @@ public class UserController {
         return new ResponseEntity<>(createduser, HttpStatus.CREATED);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/one/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> createduser = userSerivce.getUserById(id);
-        if (createduser != null) {
+        if (createduser.isPresent()) {
             return new ResponseEntity<>(createduser.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
+    @GetMapping("/user/all")
+    public List<User> getAllUsers() {
+       return userSerivce.getAllUsers();
+    }
+
+    @PostMapping("user/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        if(user.getEmail()==null|| user.getPassword()==null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Optional<User> us = userSerivce.login(user.getEmail(), user.getPassword());
+        if(us.isPresent()){
+            return new ResponseEntity<>(us.get(),HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
 
     @PutMapping("user/update/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         Optional<User> existingUser = userSerivce.getUserById(id);
-        if (existingUser != null) {
+        if (existingUser.isPresent()) {
             user.setId(id);
             User updatedUser = userSerivce.updateUser(user);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
