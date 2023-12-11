@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Eureka" target="11" />
+      <module name="job" target="11" />
+      <module name="ReservationModule" target="11" />
+      <module name="swiggy-gateway" target="17" />
+      <module name="user" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Eureka" options="-parameters" />
+      <module name="ReservationModule" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="job" options="-parameters" />
+      <module name="swiggy-gateway" options="-parameters" />
+      <module name="user" options="-parameters" />
+    </option>
+  </component>
+</project>
