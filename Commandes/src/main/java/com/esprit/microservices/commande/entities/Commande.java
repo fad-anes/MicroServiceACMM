@@ -1,9 +1,12 @@
 package com.esprit.microservices.commande.entities;
 
+import com.esprit.microservices.commande.Enum.StatutCommande;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Entity
 @Table( name = "Commande")
@@ -14,7 +17,8 @@ public class Commande implements Serializable {
     private int idCommande;
     private String adresseLivraison;
     private LocalDateTime dateCommande;
-    private Double montantTotal;
+
+    private Double montant;
 
     private int idUser;
 
@@ -22,6 +26,8 @@ public class Commande implements Serializable {
 
     @ElementCollection
     private List<String> produits ;
+
+    private StatutCommande statut;
 
     public int getIdCommande() {
         return idCommande;
@@ -55,12 +61,12 @@ public class Commande implements Serializable {
         this.quantite = quantite;
     }
 
-    public Double getMontantTotal() {
-        return montantTotal;
+    public Double getMontant() {
+        return montant;
     }
 
-    public void setMontantTotal(Double montantTotal) {
-        this.montantTotal = montantTotal;
+    public void setMontant(Double montant) {
+        this.montant = montant;
     }
 
     public int getIdUser() {
@@ -79,45 +85,25 @@ public class Commande implements Serializable {
         this.produits = produits;
     }
 
+    public StatutCommande getStatut() {
+        return statut;
+    }
+
+    public void setStatut(StatutCommande statut) {
+        this.statut = statut;
+    }
+
     public Commande() {
         super();
     }
 
-    public Commande(String adresseLivraison, LocalDateTime dateCommande, int quantite, Double montantTotal) {
+
+    public Commande(String adresseLivraison, LocalDateTime dateCommande, Double montant, int quantite, List<String> produits, StatutCommande statut) {
         this.adresseLivraison = adresseLivraison;
         this.dateCommande = dateCommande;
-        this.quantite=quantite;
-        this.montantTotal = montantTotal;
-
-    }
-
-
-    public Commande(int idCommande, String adresseLivraison, LocalDateTime dateCommande, int quantite, Double montantTotal) {
-        this.idCommande = idCommande;
-        this.adresseLivraison = adresseLivraison;
-        this.dateCommande = dateCommande;
+        this.montant = montant;
         this.quantite = quantite;
-        this.montantTotal = montantTotal;
-
-    }
-
-    public Commande(int idCommande, String adresseLivraison, LocalDateTime dateCommande,int quantite, Double montantTotal, int idUser, List<String> produits) {
-        this.idCommande = idCommande;
-        this.adresseLivraison = adresseLivraison;
-        this.dateCommande = dateCommande;
-        this.quantite=quantite;
-        this.montantTotal = montantTotal;
-        this.idUser = idUser;
         this.produits = produits;
-    }
-
-
-    public Commande(String adresseLivraison, LocalDateTime dateCommande,int quantite, Double montantTotal, int idUser, List<String> produits) {
-        this.adresseLivraison = adresseLivraison;
-        this.dateCommande = dateCommande;
-        this.quantite=quantite;
-        this.montantTotal = montantTotal;
-        this.idUser = idUser;
-        this.produits = produits;
+        this.statut = statut;
     }
 }

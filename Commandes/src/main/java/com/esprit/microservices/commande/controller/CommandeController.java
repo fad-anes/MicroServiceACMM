@@ -3,10 +3,13 @@ package com.esprit.microservices.commande.controller;
 import com.esprit.microservices.commande.entities.Commande;
 import com.esprit.microservices.commande.services.ICommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/commande")
 public class CommandeController {
@@ -48,5 +51,13 @@ public class CommandeController {
         commandeService.removeCommande(idCommande);
     }
 
+    @PutMapping("/annuler-commande/{id}")
+    public ResponseEntity<?> annulerCommande(@PathVariable int id) {
+        Commande commande = commandeService.annulerCommande(id);
+        if (commande == null) {
+            return new ResponseEntity<>("Commande not found with ID: " + id, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(commande, HttpStatus.OK);
+    }
 }
 

@@ -12,5 +12,7 @@ public interface ICommandeService {
     Commande retrieveCommande(int idCommande);
     void removeCommande(int idCommande);
 
+    Commande annulerCommande(int idCommmande);
+
 }
 
