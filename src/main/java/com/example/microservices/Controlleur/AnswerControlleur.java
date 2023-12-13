@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/answers")
 public class AnswerControlleur {
@@ -20,7 +21,10 @@ public class AnswerControlleur {
     public AnswerControlleur(IAnswerService answerService) {
         this.answerService = answerService;
     }
-
+    @GetMapping("/user/{userId}")
+    public List<Answer> getAnswersByUserId(@PathVariable Long userId) {
+        return answerService.findByUserId(userId);
+    }
     @GetMapping("/allAnswers")
     public List<Answer> retrieveAllAnswers() {
         return answerService.retrieveAllAnswers();
@@ -36,9 +40,9 @@ public class AnswerControlleur {
         }
     }
 
-    @PostMapping("/addAnswer")
-    public Answer addAnswer(@RequestBody Answer a) {
-        return answerService.addAnswer(a);
+    @PostMapping("/addAnswer/{id-quest}")
+    public Answer addAnswer(@PathVariable("id-quest") Long idQuestion, @RequestBody Answer a) {
+        return answerService.addAnswer(a ,  idQuestion );
     }
 
     @PutMapping("/updateAnswer")

@@ -19,6 +19,10 @@ public class QuestionControlleur {
     public QuestionControlleur(IQuestionService questionService) {
         this.questionService = questionService;
     }
+    @GetMapping("/user/{userId}")
+    public List<Question> getQuestionsByUserId(@PathVariable Long userId) {
+        return questionService.findByUserId(userId);
+    }
 
     @GetMapping("/allQuestions")
     public List<Question> retrieveAllQuestions() {

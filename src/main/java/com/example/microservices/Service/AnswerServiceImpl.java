@@ -2,9 +2,13 @@ package com.example.microservices.Service;
 
 import com.example.microservices.Entity.Answer;
 import com.example.microservices.Repository.AnswerRepository;
+import com.example.microservices.Repository.QuestionRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +16,10 @@ import java.util.Optional;
 @Service
 public class AnswerServiceImpl implements IAnswerService {
 
-    private final AnswerRepository answerRepo;
+    @Autowired
+    public AnswerRepository answerRepo;
+    @Autowired
+    public QuestionRepository questionRepository;
 
     @Autowired
     public AnswerServiceImpl(AnswerRepository answerRepo) {
@@ -25,7 +32,9 @@ public class AnswerServiceImpl implements IAnswerService {
     }
 
     @Override
-    public Answer addAnswer(Answer a) {
+    public Answer addAnswer(Answer a, Long quesid) {
+        a.setQuestion(this.questionRepository.findQuestionByIdQuestion(quesid).get());
+        a.setTimestamp(LocalDateTime.now());
         return answerRepo.save(a);
     }
 
@@ -49,4 +58,6 @@ public class AnswerServiceImpl implements IAnswerService {
     public List<Answer> findAnswersByTimestampRange(Date timestampStart, Date timestampEnd) {
         return answerRepo.findByTimestampBetween(timestampStart, timestampEnd);
     }
+    @Override
+    public List<Answer> findByUserId(Long userId){return  answerRepo.findByUserId(userId);}
 }

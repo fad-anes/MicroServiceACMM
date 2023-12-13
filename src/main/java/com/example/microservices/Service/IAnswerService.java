@@ -8,7 +8,7 @@ import java.util.List;
 public interface IAnswerService {
     List<Answer> retrieveAllAnswers();
 
-    Answer addAnswer(Answer a);
+    Answer addAnswer(Answer a, Long quesid);
 
     Answer updateAnswer(Answer a);
 
@@ -17,4 +17,5 @@ public interface IAnswerService {
     void removeAnswer(Long idAnswer);
 
     List<Answer> findAnswersByTimestampRange(Date timestampStart, Date timestampEnd);
+    List<Answer> findByUserId(Long userId);
 }

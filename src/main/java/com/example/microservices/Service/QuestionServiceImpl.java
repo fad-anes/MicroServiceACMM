@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.microservices.Entity.Question;
 import com.example.microservices.Repository.QuestionRepository;
+
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -18,7 +20,8 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
     @Override
-    public Question addQuestion(Question q) {
+    public Question addQuestion(Question q ) {
+        q.setTimestamp(LocalDateTime.now());
         return questionrepo.save(q);
     }
 
@@ -36,5 +39,8 @@ public class QuestionServiceImpl implements IQuestionService {
     public Question retrieveQuestion(Long idQuestion) {
         Optional<Question> optionalQuestion = questionrepo.findById(idQuestion);
         return optionalQuestion.orElse(null);
+    }
+    @Override
+    public  List<Question> findByUserId(Long userId){return questionrepo.findByUserId(userId);
     }
 }
