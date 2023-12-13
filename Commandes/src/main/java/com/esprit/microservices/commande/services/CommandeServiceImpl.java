@@ -28,6 +28,7 @@ public class CommandeServiceImpl implements ICommandeService {
 
     @Override
     public Commande updateCommande(Commande c, int idCommande) {
+        c.setIdCommande(idCommande);
         return commandeRepository.save(c);
     }
 
