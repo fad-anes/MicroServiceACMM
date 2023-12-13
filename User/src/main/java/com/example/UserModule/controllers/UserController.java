@@ -21,7 +21,7 @@ public class UserController {
     @PostMapping("user/create")
     public ResponseEntity<User> createUser(@RequestBody User reservationEquipement) {
         User createduser = userSerivce.createUser(reservationEquipement);
-        return new ResponseEntity<>(createduser, HttpStatus.CREATED);
+        return new ResponseEntity<>(createduser, HttpStatus.OK);
     }
 
     @GetMapping("/user/one/{id}")
