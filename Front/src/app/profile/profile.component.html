@@ -1,0 +1,44 @@
+<app-header-front></app-header-front>
+<section class="contact_section layout_padding">
+    <div class="container">
+      <h2>
+        Votre Profile
+      </h2>
+      <div class="">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <form [formGroup]="signinForm">
+              <div class="contact_form-container">
+                <div>
+                  <div>
+                    <input type="text" placeholder="Nom " formControlName="name">
+                  </div>
+                  <div>
+                    <input type="email" placeholder="email" formControlName="email">
+                  </div>
+                  <div>
+                    <input type="text" placeholder="password" formControlName="password">
+                  </div>
+                  <div class="mt-5 d-flex justify-content-center ">
+                    <button type="submit" (click)="onSubmit(secondDialog)">
+                      Modifier
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<app-footer-front></app-footer-front>
+<ng-template #secondDialog >
+    <div class="signin-popup">
+      <div class="signin-popup-content" >
+        <h2 matDialogTitle style="color: #eb19b7; font-size: 24px;">{{ message }} </h2>
+      </div>
+    </div>
+</ng-template>

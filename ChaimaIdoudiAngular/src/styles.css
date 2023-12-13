@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+/* styles.css */
+
+/* Owl Carousel */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css');
+
+/* Bootstrap core CSS */
+@import url('./assets/css/bootstrap.css');
+
+/* Fonts style */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap');
+
+/* Custom styles for this template */
+@import url('./assets/css/style.css');
+
+/* Responsive style */
+@import url('./assets/css/responsive.css');

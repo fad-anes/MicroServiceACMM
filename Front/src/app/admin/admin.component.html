@@ -1,0 +1,51 @@
+<div class="container-scroller">
+    <app-header-back></app-header-back>
+    <div class="container-fluid page-body-wrapper">
+        <app-menuback></app-menuback>
+        <div class="main-panel">
+            <div class="content-wrapper">
+              <div class="row">
+                <div class="col-12">
+                  <span class="d-flex align-items-center purchase-popup">
+                    <p>Bienvenu !</p>
+                  </span>
+                </div>
+              </div> 
+              <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Inventaire des utulisateurs</h4>
+                     
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Email</th>
+                            <th>password</th>
+                            <th>name</th>
+                            <th>Supprimer</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngIf="users?.length===0; else CurrentPageItems">
+                            <tr>
+                                <td colspan="4" style="padding-left: 350px; color:  #b7b5b5;">Vous n'avez pas d'utilisateur pour le moment</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #CurrentPageItems>
+                          <tr *ngFor="let item of users">
+                            <td>{{item.email}}</td>
+                            <td>{{item.password}}</td>
+                            <td>{{item.name}}</td>
+                            <td><button class="badge badge-danger" (click)="supprimer(item.id)">Supprimer</button></td>
+                          </tr>
+                        </ng-template>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+            <app-footer-back></app-footer-back>
+
+
