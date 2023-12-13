@@ -1,0 +1,29 @@
+<app-header-front></app-header-front>
+<br><br><br><br><br><br><br><br><br><br>
+<section class="offer_section">
+    <div class="container-fluid">
+        <div class="col-md-4 offset-md-1">
+          <div class="detail-box" *ngFor="let item of avis">
+            <h2>
+              {{item.name}} <br>
+              {{item.message}} <br>
+              <a *ngIf="isauthenth && item.iduser==id" (click)="supprimer(item.id)">
+                Supprimer
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <div class="box" *ngIf="isauthenth">
+    <div class="detail-box">
+      <div class="mt-5 d-flex justify-content-center ">
+        <button type="submit" (click)="Ajout()" style="background-color: #eb19b7; color: white; width: 200px; height: 50px; border: #eb19b7; border-radius: 10px;">
+          Ajouter
+        </button>
+      </div>
+    </div>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+<app-footer-front></app-footer-front>

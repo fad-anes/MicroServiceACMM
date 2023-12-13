@@ -11,22 +11,40 @@
                   </span>
                 </div>
               </div> 
-            <div class="page-header">
-                <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                    <i class="mdi mdi-home"></i>                 
-                </span>
-                Dashboard
-                </h3>
-                <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">
-                    <span></span>Overview
-                    <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                    </li>
-                </ul>
-                </nav>
-            </div>
+              <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Inventaire des utulisateurs</h4>
+                     
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Email</th>
+                            <th>password</th>
+                            <th>name</th>
+                            <th>Supprimer</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngIf="users?.length===0; else CurrentPageItems">
+                            <tr>
+                                <td colspan="4" style="padding-left: 350px; color:  #b7b5b5;">Vous n'avez pas d'utilisateur pour le moment</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #CurrentPageItems>
+                          <tr *ngFor="let item of users">
+                            <td>{{item.email}}</td>
+                            <td>{{item.password}}</td>
+                            <td>{{item.name}}</td>
+                            <td><button class="badge badge-danger" (click)="supprimer(item.id)">Supprimer</button></td>
+                          </tr>
+                        </ng-template>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
 
             <app-footer-back></app-footer-back>
 
