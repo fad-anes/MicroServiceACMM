@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MicroServiceACMM.iml" filepath="$PROJECT_DIR$/.idea/MicroServiceACMM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amine/.idea/MicroServiceACMM.iml" filepath="$PROJECT_DIR$/amine/.idea/MicroServiceACMM.iml" />
     </modules>
   </component>
 </project>
